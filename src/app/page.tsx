@@ -218,20 +218,25 @@ export default function Home() {
   const [totalRevealed, setTotalRevealed] = useState(0);
   const whitePageRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = async () => {
+  const handleClick = async (e: React.MouseEvent) => {
     setClicked(true);
     
-    // Immediately show the first card in the center of the screen
+    // Capture the click position relative to the viewport
+    const clickX = e.clientX;
+    const clickY = e.clientY;
+    
+    // Immediately show the first card close to where the user clicked
     setTimeout(async () => {
       if (whitePageRef.current) {
         const rect = whitePageRef.current.getBoundingClientRect();
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
+        // Convert viewport coordinates to white page coordinates
+        const cardX = clickX - rect.left;
+        const cardY = clickY - rect.top;
         
         const imageUrl = await fetchRestaurantImage(cardData[0].searchQuery, 0);
         const firstCard: RevealedCard = {
           id: `card-0-${Date.now()}`,
-          position: { x: centerX, y: centerY },
+          position: { x: cardX, y: cardY },
           data: cardData[0],
           dataIndex: 0,
           imageUrl
@@ -352,7 +357,7 @@ export default function Home() {
                     <motion.div
             key="white-page"
             ref={whitePageRef}
-            className="absolute inset-0 bg-gray-300 z-20"
+            className="absolute inset-0 bg-gray-100 z-20"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
