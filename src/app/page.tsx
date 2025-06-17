@@ -306,9 +306,6 @@ export default function Home() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [clicked, revealedCards, currentDataIndex, totalRevealed]);
 
-  // Calculate which cycle we're in and position within cycle
-  const currentCycle = Math.floor(totalRevealed / cardData.length);
-  const positionInCycle = (totalRevealed - 1) % cardData.length + 1;
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-gray-100">
