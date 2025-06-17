@@ -378,18 +378,15 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           >
-            {/* Logo and Title in top left */}
-            <div className="absolute top-8 left-8 z-30 flex items-center space-x-1">
+            {/* Logo in top left */}
+            <div className="absolute top-8 left-8 z-30">
               <Image
-                src="/next-logo.png"
-                alt="Blackbird Logo"
-                width={48}
-                height={48}
+                src="/wrapbird.png"
+                alt="Wrapbird Logo"
+                width={140}
+                height={40}
                 className="drop-shadow-md"
               />
-              <h1 className="text-xl font-serif font-bold text-gray-900">
-                Blackbird Wrapped
-              </h1>
             </div>
 
               {/* Map Feature Coming Soon */}
