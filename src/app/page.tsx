@@ -320,6 +320,25 @@ export default function Home() {
             transition={{ duration: 1.2, ease: "easeInOut" }}
             onClick={handleClick}
           >
+            {/* Logo in top left */}
+            <motion.div 
+              className="absolute top-8 left-8 z-20 cursor-pointer"
+              whileHover={{ 
+                y: -8,
+                transition: { duration: 0.3, ease: "easeOut" }
+              }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={160}
+                height={54}
+                className="drop-shadow-md"
+                priority
+              />
+            </motion.div>
+
             {/* Spline Coin Background */}
             <div className="absolute inset-0 -z-10">
               <iframe
@@ -351,7 +370,7 @@ export default function Home() {
       {/* White Page with Sliding Window Cards */}
       <AnimatePresence>
         {clicked && (
-                    <motion.div
+          <motion.div
             key="white-page"
             ref={whitePageRef}
             className="absolute inset-0 bg-gray-100 z-20"
@@ -359,10 +378,17 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeInOut" }}
           >
-            {/* Top Title */}
-            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-30">
-              <h1 className="text-2xl font-serif font-bold text-gray-900 text-center">
-                Your 2024 Blackbird Wrapped
+            {/* Logo and Title in top left */}
+            <div className="absolute top-8 left-8 z-30 flex items-center space-x-1">
+              <Image
+                src="/next-logo.png"
+                alt="Blackbird Logo"
+                width={48}
+                height={48}
+                className="drop-shadow-md"
+              />
+              <h1 className="text-xl font-serif font-bold text-gray-900">
+                Blackbird Wrapped
               </h1>
             </div>
 
@@ -378,15 +404,15 @@ export default function Home() {
                 <span className="text-lg font-serif text-gray-900">
                   {((totalRevealed - 1) % cardData.length) + 1}/20
                 </span>
-              </div>
-
+            </div>
+            
               {/* Revealed Cards at Fixed Positions */}
-              <AnimatePresence>
+            <AnimatePresence>
               {revealedCards.map((revealedCard, index) => (
                 <motion.div
                   key={revealedCard.id}
                   className="absolute rounded-lg overflow-hidden shadow-2xl pointer-events-none"
-                  style={{ 
+                  style={{
                     width: 'min(52vw, 520px)', // Just a bit larger while maintaining proportion
                     height: '364px', // Maintains the same aspect ratio (520:364 = 10:7)
                     left: revealedCard.position.x,
@@ -417,16 +443,16 @@ export default function Home() {
                       />
                     ) : (
                       // Fallback to original background while loading
-                      <Image
-                        src="/background.png"
+                    <Image
+                      src="/background.png"
                         alt="Card Background"
-                        fill
-                        style={{ objectFit: "cover" }}
+                      fill
+                      style={{ objectFit: "cover" }}
                         className="brightness-90"
-                      />
+                    />
                     )}
                   </div>
-
+                  
                   {/* Card Content Overlay */}
                   <div className="relative z-10 h-full flex flex-col justify-between p-4 bg-gradient-to-br from-black/60 via-black/30 to-transparent">
                     {/* Top Section - Title */}
@@ -435,7 +461,7 @@ export default function Home() {
                         {revealedCard.data.title}
                       </h3>
                     </div>
-
+                    
                     {/* Bottom Section - Restaurant Details */}
                     <div className="space-y-2">
                       <h2 className="text-white text-4xl font-black leading-none tracking-tight drop-shadow-lg font-serif">
